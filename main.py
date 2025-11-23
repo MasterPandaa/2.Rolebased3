@@ -1,7 +1,8 @@
-import pygame
 import random
-from typing import List, Tuple, Deque, Set
 from collections import deque
+from typing import Deque, List, Set, Tuple
+
+import pygame
 
 # -----------------------------
 # Constants and Configurations
@@ -29,10 +30,10 @@ RIGHT = (1, 0)
 # Game speeds
 MOVE_TICKS_MS = 120  # snake moves every N ms (controls game speed)
 
-
 # -----------------------------
 # Helper functions
 # -----------------------------
+
 
 def grid_to_px(cell: Tuple[int, int]) -> Tuple[int, int]:
     x, y = cell
@@ -66,7 +67,8 @@ class Food:
 
         # Otherwise, sample until finding a free cell
         while True:
-            pos = (self.rng.randrange(GRID_COLS), self.rng.randrange(GRID_ROWS))
+            pos = (self.rng.randrange(GRID_COLS),
+                   self.rng.randrange(GRID_ROWS))
             if pos not in occupied:
                 self.position = pos
                 return
@@ -161,6 +163,7 @@ class Snake:
 # Game Functions
 # -----------------------------
 
+
 def draw_grid(surface: pygame.Surface):
     # Subtle grid for visual aid
     for x in range(0, SCREEN_WIDTH, CELL_SIZE):
@@ -183,14 +186,24 @@ def game_over_screen(surface: pygame.Surface, font: pygame.font.Font, score: int
     score_text = font.render(f"Final Score: {score}", True, WHITE)
     hint = font.render("Press Enter to Restart or Esc to Quit", True, WHITE)
 
-    surface.blit(title, title.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 30)))
-    surface.blit(score_text, score_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)))
-    surface.blit(hint, hint.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 30)))
+    surface.blit(
+        title, title.get_rect(
+            center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 30))
+    )
+    surface.blit(
+        score_text, score_text.get_rect(
+            center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
+    )
+    surface.blit(
+        hint, hint.get_rect(
+            center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 30))
+    )
 
 
 # -----------------------------
 # Main loop
 # -----------------------------
+
 
 def main():
     pygame.init()
